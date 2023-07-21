@@ -7,7 +7,7 @@
 with lib;
 with lib.my; let
   cfg = config.modules.apps.alacritty;
-  configDir = toString ../config;
+  configDir = toString ../../config;
   nixGLWrap = pkg: pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
     mkdir $out
     ln -s ${pkg}/* $out

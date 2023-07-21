@@ -8,7 +8,7 @@
 with lib;
 with lib.my; let
   cfg = config.modules.shell.tmux;
-  configDir = builtins.toString ../config;
+  configDir = builtins.toString ../../config;
 in {
   options.modules.shell.tmux = with types; {
     enable = mkBoolOpt false;
