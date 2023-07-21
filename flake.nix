@@ -20,6 +20,6 @@
     lib = nixpkgs.lib.extend (mkLib {inherit pkgs inputs;});
   in {
     modules = mapModulesRec ./modules import;
-    modulesArr = mapModulesRec' ./modules import;
+    modulesArr = mapModulesRec' (toString ./modules) import;
   };
 }
