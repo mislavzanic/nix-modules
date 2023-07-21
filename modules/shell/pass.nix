@@ -11,10 +11,9 @@ with lib.my; let
 in {
   options.modules.shell.pass = with types; {
     enable = mkBoolOpt false;
-    pass = {
-      git = mkOpt str "";
-      dir = mkOpt str "$HOME/.secrets/password-store";
-    };
+
+    git = mkOpt str "";
+    dir = mkOpt str "$HOME/.secrets/password-store";
   };
 
   config = mkIf cfg.enable (mkMerge [
