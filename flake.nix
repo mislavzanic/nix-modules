@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/master";
     nix-utils = {
-      url = "github:mislavzanic/nix-utils/master";
+      url = "github:mislavzanic/nix-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
