@@ -31,7 +31,7 @@ in {
           )))
         pass-git-helper
       ];
-      env.PASSWORD_STORE_DIR = cfg.pass.dir;
+      env.PASSWORD_STORE_DIR = cfg.dir;
     }
     (mkIf (cfg.git != "") {
       system.userActivationScripts = {
