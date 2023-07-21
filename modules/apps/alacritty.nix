@@ -20,7 +20,7 @@ with lib.my; let
     done
   '';
 in {
-  options.shell.alacritty = {
+  options.modules.apps.alacritty = {
     enable = mkBoolOpt false;
     withNixGL = mkBoolOpt false;
     homeManager = mkBoolOpt true;
