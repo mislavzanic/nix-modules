@@ -12,7 +12,7 @@
     nix-utils,
     ...
   }: let
-    inherit (lib.my) mapModulesRec;
+    inherit (lib.my) mapModulesRec mapModulesRec';
     inherit (nix-utils) mkPkgs mkLib;
     system = "x86_64-linux";
 
