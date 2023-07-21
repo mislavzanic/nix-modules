@@ -39,8 +39,8 @@ in {
           if [ -d /home/${config.user.name}/.ssh ] || [ -d /etc/.ssh ]; then
               export PATH="/home/${config.user.name}/.ssh:$PATH"
               export PATH="${pkgs.openssh}/bin"
-              if [ ! -d  "${cfg.pass.dir}" ]; then
-                  ${pkgs.git}/bin/git clone "${cfg.pass.git}" "${cfg.pass.dir}"
+              if [ ! -d  "${cfg.dir}" ]; then
+                  ${pkgs.git}/bin/git clone "${cfg.git}" "${cfg.dir}"
               fi
           fi
         '';
