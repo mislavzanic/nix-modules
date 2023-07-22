@@ -1,8 +1,0 @@
-"$schema" = 'https://starship.rs/config-schema.json'
-
-[gcloud]
-disabled = true
-
-[nix_shell]
-symbol  = "🐚 "
-format  = '[$symbol$state $name](bold blue) '

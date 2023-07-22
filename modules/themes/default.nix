@@ -81,23 +81,23 @@ in {
         executable = true;
       };
       modules.theme.onReload.xtheme = xrdb;
-      services.xserver.displayManager.sessionCommands = mkIf services.xserver.enable ''
+      services.xserver.displayManager.sessionCommands = mkIf config.services.xserver.enable ''
         cat ~/.config/xtheme/* | '${pkgs.xorg.xrdb}/bin/xrdb' -load
       '';
     })
-    (mkIf (config.wm != {}) {
+    (mkIf config.modules.wm.enable {
       home.configFile."wm/xinit" = {
         text = "$XDG_CONFIG_HOME/xtheme.init";
         executable = true;
       };
     })
-    (mkIf config.modules.services.dunst.enable {
-      home.configFile = {
-        "dunst/dunstrc".text = import ./dunst.nix;
-      };
-    })
+    # (mkIf config.modules.services.dunst.enable {
+    #   home.configFile = {
+    #     "dunst/dunstrc".text = import ./dunst.nix;
+    #   };
+    # })
     {
-      home.configFile = with cfg.modules; (mkMerge [
+      home.configFile = with config.modules; (mkMerge [
         (mkIf apps.alacritty.enable {
           "alacritty/color.yml".text = with cfg.colors; ''
             colors:
@@ -171,6 +171,21 @@ in {
             st.color15: bwht
             st.opacity: alph
           '';
+          "fontconfig/fonts.conf".text = ''
+            <?xml version="1.0"?>
+            <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+            <fontconfig>
+            <alias>
+              <family>monospace</family>
+              <prefer>
+                <family>IosevkaTerm Nerd Font</family>
+                <family>DejaVu Sans Mono</family>
+                <family>Noto Color Emoji</family>
+                <family>Noto Emoji</family>
+              </prefer>
+            </alias>
+            </fontconfig>
+          '';
         }
       ]);
 
@@ -178,24 +193,6 @@ in {
         sansSerif = [cfg.fonts.sans.name];
         monospace = [cfg.fonts.mono.name];
         emoji = ["Noto Color Emoji"];
-      };
-
-      home.configFile = {
-        "fontconfig/fonts.conf".text = ''
-          <?xml version="1.0"?>
-          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-          <fontconfig>
-          <alias>
-            <family>monospace</family>
-            <prefer>
-              <family>IosevkaTerm Nerd Font</family>
-              <family>DejaVu Sans Mono</family>
-              <family>Noto Color Emoji</family>
-              <family>Noto Emoji</family>
-            </prefer>
-          </alias>
-          </fontconfig>
-        '';
       };
     }
 
