@@ -54,6 +54,7 @@ with lib.my; {
       # nixos-rebuild build-vm to work.
       home = {
         file = mkAliasDefinitions options.home.file;
+        homeDirectory = config.user.home;
       };
       xdg = {
         configFile = mkAliasDefinitions options.home.configFile;
