@@ -34,6 +34,9 @@ in {
           recursive = true;
         };
       };
+
+      home.packages = with pkgs;
+        if cfg.withNixGL then [ nixGLWrap alacritty] else [alacritty];
     })
     {
       user.packages = with pkgs;
