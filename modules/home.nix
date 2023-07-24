@@ -88,10 +88,10 @@ with lib.my; {
       # because it contains a nix store path.
       env.PATH = ["$DOTFILES_BIN" "$XDG_BIN_HOME" "$PATH"];
     }
-    (mkIf cfg.nixos {
-      environment.extraInit =
-        concatStringsSep "\n"
-        (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.env);
-    })
+    # (mkIf cfg.nixos {
+    #   environment.extraInit =
+    #     concatStringsSep "\n"
+    #     (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.env);
+    # })
   ]);
 }
