@@ -54,7 +54,7 @@ in {
       };
     };
 
-    environment.systemPackages = with pkgs; [
+    user.packages = with pkgs; [
       zsh
       nix-zsh-completions
       exa

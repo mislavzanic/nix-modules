@@ -36,7 +36,7 @@ in {
       };
     })
     {
-      environment.systemPackages = with pkgs;
+      user.packages = with pkgs;
         if cfg.withNixGL then [ nixGLWrap alacritty] else [alacritty];
     }
   ]);
