@@ -50,6 +50,7 @@
   in {
     inherit overlays;
     modules = mapModulesRec ./modules import;
-    modulesArr = mapModulesRec' (toString ./modules) import;
+    nixosModules = mapModulesRec' (toString ./modules) import;
+    # homeModules = mapModulesRec'()
   };
 }

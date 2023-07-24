@@ -2,7 +2,7 @@
   config,
   options,
   lib,
-  home-manager,
+  pkgs,
   ...
 }:
 with lib;
@@ -10,8 +10,6 @@ with lib.my; {
   options = with types; {
     user = mkOpt attrs {};
     
-    nixos = mkBoolOpt true;
-
     dotfiles = {
       dir = mkOpt path "";
       binDir = mkOpt path "${config.dotfiles.dir}/bin";
@@ -54,28 +52,16 @@ with lib.my; {
 
       # Install user packages to /etc/profiles instead. Necessary for
       # nixos-rebuild build-vm to work.
-      home-manager = {
-        useUserPackages = true;
-
-        # aliases
-        #   home.file        ->  home-manager.users.mislav.home.file
-        #   home.configFile  ->  home-manager.users.mislav.home.xdg.configFile
-        #   home.dataFile    ->  home-manager.users.mislav.home.xdg.dataFile
-        users.${config.user.name} = {
-          home = {
-            file = mkAliasDefinitions options.home.file;
-            # Necessary for home-manager to work with flakes, otherwise it will
-            # look for a nixpkgs channel.
-            stateVersion = config.system.stateVersion;
-          };
-          xdg = {
-            configFile = mkAliasDefinitions options.home.configFile;
-            dataFile = mkAliasDefinitions options.home.dataFile;
-          };
-        };
+      home = {
+        file = mkAliasDefinitions options.home.file;
+        # Necessary for home-manager to work with flakes, otherwise it will
+        # look for a nixpkgs channel.
+        stateVersion = config.system.stateVersion;
       };
-
-      users.users.${config.user.name} = mkAliasDefinitions options.user;
+      xdg = {
+        configFile = mkAliasDefinitions options.home.configFile;
+        dataFile = mkAliasDefinitions options.home.dataFile;
+      };
 
       nix.settings = let
         users = ["root" config.user.name];
@@ -88,10 +74,5 @@ with lib.my; {
       # because it contains a nix store path.
       env.PATH = ["$DOTFILES_BIN" "$XDG_BIN_HOME" "$PATH"];
     }
-    # (mkIf cfg.nixos {
-    #   environment.extraInit =
-    #     concatStringsSep "\n"
-    #     (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.env);
-    # })
   ]);
 }
