@@ -36,11 +36,11 @@ in {
       };
 
       home.packages = with pkgs;
-        if cfg.withNixGL then [ nixGLWrap alacritty] else [alacritty];
+        if cfg.withNixGL then [(nixGLWrap alacritty)] else [alacritty];
     })
     {
       user.packages = with pkgs;
-        if cfg.withNixGL then [ nixGLWrap alacritty] else [alacritty];
+        if cfg.withNixGL then [(nixGLWrap alacritty)] else [alacritty];
     }
   ]);
 }
