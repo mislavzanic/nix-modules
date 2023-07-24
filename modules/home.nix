@@ -53,7 +53,6 @@ with lib.my; {
       # Install user packages to /etc/profiles instead. Necessary for
       # nixos-rebuild build-vm to work.
       home = {
-        file = mkAliasDefinitions options.home.file;
         homeDirectory = config.user.home;
         username = config.user.name;
       };
