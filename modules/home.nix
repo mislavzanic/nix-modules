@@ -16,6 +16,10 @@ with lib.my; {
       configDir = mkOpt path "${config.dotfiles.dir}/config";
     };
 
+    fonts = {
+      fonts = mkOpt (listOf path) [];
+    };
+
     home = {
       configFile = mkOpt' attrs {} "Files to place in $XDG_CONFIG_HOME";
       dataFile = mkOpt' attrs {} "Files to place in $XDG_DATA_HOME";
