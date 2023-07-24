@@ -55,6 +55,7 @@ with lib.my; {
       home = {
         file = mkAliasDefinitions options.home.file;
         homeDirectory = config.user.home;
+        username = config.user.name;
       };
       xdg = {
         configFile = mkAliasDefinitions options.home.configFile;
