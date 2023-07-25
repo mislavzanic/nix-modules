@@ -15,7 +15,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    config.modules.${cfgType}.userPackages = [ pkgs.fzf ];
+    modules.${cfgType}.userPackages = [ pkgs.fzf ];
     # modules.shell.zsh.rcInit = ''
     #   source "$(fzf-share)/key-bindings.zsh"
     #   source "$(fzf-share)/completion.zsh"
