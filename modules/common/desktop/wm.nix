@@ -10,7 +10,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    modules.${cfgType}.desktop.wm = {
+    modules.${cfgType} = {
       packages = with pkgs; [
         xmonad-log
         haskellPackages.mzanic-xmonad
@@ -26,24 +26,15 @@ in {
         cantarell-fonts
         noto-fonts-emoji
       ];
-    };
-    services = {
-      xserver = {
+      desktop.wm = {
         enable = true;
-        displayManager = {
-          defaultSession = "none+myxmonad";
-        };
-
-        windowManager = {
-          session = [
-            {
-              name = "myxmonad";
-              start = ''
-                /usr/bin/env mzanic-xmonad &
-                waitPID=$!
-              '';
-            }
-          ];
+        defaultSession = "none+myxmonad";
+        session = {
+          name = "myxmonad";
+          start = ''
+            /usr/bin/env mzanic-xmonad &
+            waitPID=$!
+          '';
         };
       };
     };

@@ -5,12 +5,23 @@ let
   cfg = config.modules.nixos.desktop.wm;
 in {
   options.modules.nixos.desktop.wm = with types; {
-    packages = mkOpt (listOf path) [];
-    fonts = mkOpt (listOf path) [];
+    enable = mkBoolOpt false;
+    defaultSession = mkOpt str "none+myxmoand";
+    session = mkOpt attrs {};
   };
 
-  config = mkIf (packages != [] || fonts != []){
-    environment.systemPackages = packages;
-    fonts.fonts = fonts;
+  config = mkIf cfg.enable {
+    services = {
+      xserver = {
+        enable = true;
+        displayManager = {
+          defaultSession = cfg.defaultSession;
+        };
+
+        windowManager = {
+          session = [cfg.session];
+        };
+      };
+    };
   };
 }
