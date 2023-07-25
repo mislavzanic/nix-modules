@@ -8,7 +8,7 @@
 with lib;
 with lib.my; {
   options = with types; {
-    genericLinux = mkOptBool false;
+    genericLinux = mkBoolOpt false;
   };
   config = {
     type = "home";
