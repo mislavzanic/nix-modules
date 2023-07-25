@@ -43,7 +43,7 @@ in {
       "xmobar/xpm".source = "${configDir}" ++ /xmobar/xpm;
       "xmobar/trayer-padding-icon.sh" = {
         source = "${configDir}" ++ /xmobar/trayer-padding-icon.sh;
-        mode = "755";
+        # mode = "755";
       };
     };
   };
