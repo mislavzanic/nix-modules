@@ -7,7 +7,7 @@ let
       mkValueString = v:
              if v == true then ''yes''
         else if v == false then ''no''
-        else ''${v}''
+        else ''${v}'';
     } " = ";
   };
 in {}
