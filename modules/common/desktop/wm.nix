@@ -26,17 +26,7 @@ in {
         cantarell-fonts
         noto-fonts-emoji
       ];
-      desktop.wm = {
-        enable = true;
-        defaultSession = "none+myxmonad";
-        session = {
-          name = "myxmonad";
-          start = ''
-            /usr/bin/env mzanic-xmonad &
-            waitPID=$!
-          '';
-        };
-      };
+      desktop.wm.enable = true;
     };
 
     home.configFile = {

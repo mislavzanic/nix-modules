@@ -6,8 +6,6 @@ let
 in {
   options.modules.nixos.desktop.wm = with types; {
     enable = mkBoolOpt false;
-    defaultSession = mkOpt str "none+myxmoand";
-    session = mkOpt attrs {};
   };
 
   config = mkIf cfg.enable {
@@ -15,11 +13,19 @@ in {
       xserver = {
         enable = true;
         displayManager = {
-          defaultSession = cfg.defaultSession;
+          defaultSession = "none+myxmonad";
         };
 
         windowManager = {
-          session = [cfg.session];
+          session = [
+            {
+              name = "myxmonad";
+              start = ''
+                /usr/bin/env mzanic-xmonad &
+                waitPID=$!
+              '';
+            }
+          ];
         };
       };
     };

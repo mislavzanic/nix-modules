@@ -6,14 +6,12 @@ let
 in {
   options.modules.home.desktop.wm = with types; {
     enable = mkBoolOpt false;
-    defaultSession = mkOpt str "none+myxmoand";
-    session = mkOpt attrs {};
   };
 
   config = mkIf cfg.enable {
     xsession = {
       enable = true;
-      windowManager.command = cfg.session.start;
+      windowManager.command = with pkgs; "${haskellPackages.mzanic-xmonad}/bin/mzanic-xmonad";
     };
   };
 }
