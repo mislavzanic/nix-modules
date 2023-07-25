@@ -43,7 +43,5 @@ with lib.my; {
       trusted-users = users;
       allowed-users = users;
     };
-
-    env.PATH = ["$DOTFILES_BIN" "$XDG_BIN_HOME" "$PATH"];
   };
 }

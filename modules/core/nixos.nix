@@ -51,6 +51,8 @@ with lib.my; {
     };
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
+
+    env.PATH = ["$DOTFILES_BIN" "$XDG_BIN_HOME" "$PATH"];
     environment.extraInit =
       concatStringsSep "\n"
       (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.env);
