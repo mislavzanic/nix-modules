@@ -20,7 +20,7 @@ in {
         xss-lock
       ];
 
-      fonts = [
+      fonts = with pkgs; [
         font-awesome_5
         nerdfonts
         cantarell-fonts
