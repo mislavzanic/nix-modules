@@ -49,7 +49,7 @@
     lib = nixpkgs.lib.extend (mkLib {inherit pkgs inputs;});
   in {
     inherit overlays;
-    modules = mapModulesRec ./modules import;
+    modules = (mapModulesRec ./modules import) // (mapModulesRec ./core import);
     modulesArr = (mapModulesRec' (toString ./modules) import) ++ (mapModulesRec' (toString ./core) import);
     # homeModules = mapModulesRec'()
   };
