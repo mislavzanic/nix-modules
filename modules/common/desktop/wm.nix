@@ -40,9 +40,9 @@ in {
     };
 
     home.configFile = {
-      "xmobar/xpm".source = "${configDir}" ++ /xmobar/xpm;
+      "xmobar/xpm".source = "${configDir}/xmobar/xpm";
       "xmobar/trayer-padding-icon.sh" = {
-        source = "${configDir}" ++ /xmobar/trayer-padding-icon.sh;
+        source = "${configDir}/xmobar/trayer-padding-icon.sh";
         # mode = "755";
       };
     };
