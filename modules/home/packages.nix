@@ -11,6 +11,6 @@ in {
   };
 
   config = {
-    home.packages = packages ++ fonts ++ userPackages;
+    home.packages = cfg.packages ++ cfg.fonts ++ cfg.userPackages;
   };
 }
