@@ -85,17 +85,17 @@ in {
         cat ~/.config/xtheme/* | '${pkgs.xorg.xrdb}/bin/xrdb' -load
       '';
     })
-    (mkIf config.modules.wm.enable {
+    (mkIf config.modules.desktop.wm.enable {
       home.configFile."wm/xinit" = {
         text = "$XDG_CONFIG_HOME/xtheme.init";
         executable = true;
       };
     })
-    # (mkIf config.modules.services.dunst.enable {
-    #   home.configFile = {
-    #     "dunst/dunstrc".text = import ./dunst.nix;
-    #   };
-    # })
+    (mkIf config.modules.services.dunst.enable {
+      home.configFile = {
+        "dunst/dunstrc".text = import ./dunst.nix;
+      };
+    })
     {
       home.configFile = with config.modules; (mkMerge [
         (mkIf apps.alacritty.enable {

@@ -8,18 +8,8 @@
 with lib;
 with lib.my; {
   options = with types; {
-    user = mkOpt attrs {};
-    
-    dotfiles = {
-      dir = mkOpt path "";
-      binDir = mkOpt path "${config.dotfiles.dir}/bin";
-      configDir = mkOpt path "${config.dotfiles.dir}/config";
-    };
-
     home = {
       file = mkOpt' attrs {} "Files to place directly in $HOME";
-      configFile = mkOpt' attrs {} "Files to place in $XDG_CONFIG_HOME";
-      dataFile = mkOpt' attrs {} "Files to place in $XDG_DATA_HOME";
     };
 
     env = mkOption {
@@ -36,19 +26,7 @@ with lib.my; {
   };
 
   config = {
-    user = let
-      user = builtins.getEnv "USER";
-      name = if elem user ["" "root"] then "mzanic" else user;
-    in {
-      inherit name;
-      description = "The primary user account";
-      extraGroups = ["wheel" "networkmanager" "audio" "video"];
-      isNormalUser = true;
-      home = "/home/${name}";
-      group = "users";
-      uid = 1000;
-    };
-
+    type = "nixos";
     # Install user packages to /etc/profiles instead. Necessary for
     # nixos-rebuild build-vm to work.
     home-manager = {
@@ -73,17 +51,6 @@ with lib.my; {
     };
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
-
-    nix.settings = let
-      users = ["root" config.user.name];
-    in {
-      trusted-users = users;
-      allowed-users = users;
-    };
-
-    # must already begin with pre-existing PATH. Also, can't use binDir here,
-    # because it contains a nix store path.
-    env.PATH = ["$DOTFILES_BIN" "$XDG_BIN_HOME" "$PATH"];
     environment.extraInit =
       concatStringsSep "\n"
       (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.env);

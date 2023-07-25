@@ -7,7 +7,8 @@
 with lib;
 with lib.my; let
   cfg = config.modules.apps.alacritty;
-  configDir = toString ../../config;
+  cfgType = config.type;
+  configDir = toString ../../../config;
   nixGLWrap = pkg: pkgs.runCommand "${pkg.name}-nixgl-wrapper" {} ''
     mkdir $out
     ln -s ${pkg}/* $out
@@ -23,24 +24,17 @@ in {
   options.modules.apps.alacritty = {
     enable = mkBoolOpt false;
     withNixGL = mkBoolOpt false;
-    homeManager = mkBoolOpt true;
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    (mkIf cfg.homeManager {
-      home.configFile = {
-        "alacritty" = {
-          source = "${configDir}/alacritty";
-          recursive = true;
-        };
-      };
+  config = mkIf cfg.enable {
+    modules.${cfgType}.userPackages = with pkgs;
+      if cfg.withNixGL then [(nixGLWrap alacritty)] else [alacritty];
 
-      home.packages = with pkgs;
-        if cfg.withNixGL then [(nixGLWrap alacritty)] else [alacritty];
-    })
-    {
-      user.packages = with pkgs;
-        if cfg.withNixGL then [(nixGLWrap alacritty)] else [alacritty];
-    }
-  ]);
+    home.configFile = {
+      "alacritty" = {
+        source = "${configDir}/alacritty";
+        recursive = true;
+      };
+    };
+  };
 }

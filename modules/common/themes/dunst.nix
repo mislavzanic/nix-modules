@@ -7,8 +7,7 @@ let
       mkValueString = v:
              if v == true then ''yes''
         else if v == false then ''no''
-        else if isString v then ''${v}''
-        else generators.mkValueStringDefault {} v;
+        else ''${v}''
     } " = ";
   };
 in {}
