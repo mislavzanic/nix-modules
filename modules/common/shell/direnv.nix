@@ -14,9 +14,12 @@ in {
   };
 
   config = mkIf cfg.enable {
+    
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
+
+    modules.shell.zsh.rcInit = ''eval "$(direnv hook zsh)"'';
   };
 }

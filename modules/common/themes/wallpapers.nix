@@ -36,10 +36,7 @@ in {
     '';
   in (mkMerge [
     ({
-      services.xserver.displayManager.lightdm.background = wallpapers + "${cfg.loginWallpaper}";
-
-      services.xserver.displayManager.sessionCommands = cmd;
-      modules.theme.onReload.wallpaper = cmd;
+      modules.core.xserver.sessionCommands = cmd;
       home.dataFile = mkIf (cfg.wallpaper != "") {
         "wallpaper".source = "${wallpapers}/${cfg.wallpaper}";
       };

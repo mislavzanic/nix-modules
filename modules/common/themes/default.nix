@@ -8,6 +8,7 @@
 with lib;
 with lib.my; let
   cfg = config.modules.theme;
+  cfgType = config.type;
 in {
   options.modules.theme = with types; {
     active = mkOption {
@@ -81,7 +82,7 @@ in {
         executable = true;
       };
       modules.theme.onReload.xtheme = xrdb;
-      services.xserver.displayManager.sessionCommands = mkIf config.services.xserver.enable ''
+      modules.core.xserver.sessionCommands = ''
         cat ~/.config/xtheme/* | '${pkgs.xorg.xrdb}/bin/xrdb' -load
       '';
     })
@@ -188,31 +189,6 @@ in {
           '';
         }
       ]);
-
-      fonts.fontconfig.defaultFonts = {
-        sansSerif = [cfg.fonts.sans.name];
-        monospace = [cfg.fonts.mono.name];
-        emoji = ["Noto Color Emoji"];
-      };
     }
-
-    (mkIf (cfg.onReload != {})
-      (let
-        reloadTheme = with pkgs; (writeScriptBin "reloadTheme" ''
-          #!${stdenv.shell}
-          echo "Reloading current theme: ${cfg.active}"
-          ${concatStringsSep "\n"
-            (mapAttrsToList (name: script: ''
-                echo "[${name}]"
-                ${script}
-              '')
-              cfg.onReload)}
-        '');
-      in {
-        user.packages = [reloadTheme];
-        system.userActivationScripts.reloadTheme = ''
-          [ -z "$NORELOAD" ] && ${reloadTheme}/bin/reloadTheme
-        '';
-      }))
   ]);
 }

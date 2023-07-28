@@ -8,7 +8,8 @@
 with lib;
 with lib.my; let
   cfg = config.modules.shell.zsh;
-  configDir = toString ../../config;
+  configDir = toString ../../../config;
+  cfgType = config.type;
 in {
   options.modules.shell.zsh = with types; {
     enable = mkBoolOpt false;
@@ -29,15 +30,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    users.defaultUserShell = pkgs.zsh;
-
     programs = {
       zsh = {
         enable = true;
         enableCompletion = true;
-        enableGlobalCompInit = false;
-
-        autosuggestions.enable = true;
         syntaxHighlighting.enable = true;
 
         shellAliases = {
@@ -48,13 +44,12 @@ in {
           g = "git";
           v = "vim";
         };
-
-        histSize = 10000000;
-        histFile = "$XDG_CACHE_HOME/zsh/history";
       };
     };
 
-    user.packages = with pkgs; [
+    modules.${cfgType}.shell.zsh.enable = true;
+
+    core.userPackages = with pkgs; [
       zsh
       nix-zsh-completions
       exa

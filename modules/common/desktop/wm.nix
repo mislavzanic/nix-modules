@@ -10,7 +10,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    modules.${cfgType} = {
+    core = {
       packages = with pkgs; [
         xmonad-log
         haskellPackages.mzanic-xmonad
@@ -26,14 +26,15 @@ in {
         cantarell-fonts
         noto-fonts-emoji
       ];
-      desktop.wm.enable = true;
     };
+
+    modules.${cfgType}.desktop.wm.enable = true;
 
     home.configFile = {
       "xmobar/xpm".source = "${configDir}/xmobar/xpm";
       "xmobar/trayer-padding-icon.sh" = {
         source = "${configDir}/xmobar/trayer-padding-icon.sh";
-        # mode = "755";
+        executable = true;
       };
     };
   };

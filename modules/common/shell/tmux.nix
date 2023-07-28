@@ -16,9 +16,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs; [tmux];
-
-    modules.theme.onReload.tmux = "${pkgs.tmux}/bin/tmux source-file $TMUX_HOME/extraInit";
+    core.userPackages = with pkgs; [tmux];
 
     modules.shell.zsh = {
       rcFiles = ["${configDir}/tmux/aliases.zsh"];

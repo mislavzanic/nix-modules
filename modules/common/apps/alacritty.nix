@@ -27,7 +27,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    modules.${cfgType}.userPackages = with pkgs;
+    core.userPackages = with pkgs;
       if cfg.withNixGL then [(nixGLWrap alacritty)] else [alacritty];
 
     home.configFile = {

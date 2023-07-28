@@ -18,7 +18,7 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      user.packages = with pkgs; [
+      core.userPackages = with pkgs; [
         (pass.withExtensions (exts:
           [
             exts.pass-otp
@@ -33,18 +33,5 @@ in {
       ];
       env.PASSWORD_STORE_DIR = cfg.dir;
     }
-    (mkIf (cfg.git != "") {
-      system.userActivationScripts = {
-        getPass = ''
-          if [ -d /home/${config.user.name}/.ssh ] || [ -d /etc/.ssh ]; then
-              export PATH="/home/${config.user.name}/.ssh:$PATH"
-              export PATH="${pkgs.openssh}/bin"
-              if [ ! -d  "${cfg.dir}" ]; then
-                  ${pkgs.git}/bin/git clone "${cfg.git}" "${cfg.dir}"
-              fi
-          fi
-        '';
-      };
-    })
   ]);
 }
