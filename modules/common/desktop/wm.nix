@@ -42,8 +42,6 @@ in {
       ];
     };
 
-    # modules.${cfgType}.desktop.wm.enable = true;
-
     home.configFile = {
       "xmobar/xpm".source = "${configDir}/xmobar/xpm";
       "xmobar/trayer-padding-icon.sh" = {
