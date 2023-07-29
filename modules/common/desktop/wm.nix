@@ -18,6 +18,8 @@ in {
         trayer
         i3lock
         xss-lock
+        networkmanagerapplet
+        pasystray
       ];
 
       fonts = with pkgs; [

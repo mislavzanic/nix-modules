@@ -24,22 +24,18 @@ in {
 
   config = 
   let
-    wCfg = config.services.xserver.desktopManager.wallpaper;
     cmd = ''
-      ${pkgs.feh}/bin/feh --bg-${wCfg.mode} --no-fehbg \
-        ${optionalString wCfg.combineScreens "--no-xinerama"} \
+      ${pkgs.feh}/bin/feh --bg-fill --no-fehbg \
         ${
           if (cfg.wallpaper != "")
           then "$XDG_DATA_HOME/wallpaper"
           else "--randomize ${wallpapers}/*"
         }
     '';
-  in (mkMerge [
-    ({
-      modules.core.xserver.sessionCommands = cmd;
-      home.dataFile = mkIf (cfg.wallpaper != "") {
-        "wallpaper".source = "${wallpapers}/${cfg.wallpaper}";
-      };
-    })
-  ]);
+  in {
+    modules.core.xserver.sessionCommands = cmd;
+    home.dataFile = mkIf (cfg.wallpaper != "") {
+      "wallpaper".source = "${wallpapers}/${cfg.wallpaper}";
+    };
+  };
 }
