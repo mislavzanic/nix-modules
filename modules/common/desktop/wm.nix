@@ -2,7 +2,7 @@
 with lib;
 with lib.my;
 let
-  cfg = config.modules.desktop.wm; cfgType = config.type;
+  cfg = config.modules.desktop.wm;
   cfgType = config.type;
   configDir = ../../../config;
 in {
