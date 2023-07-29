@@ -42,7 +42,7 @@ with lib.my; {
       packages = mkOpt (listOf package) [];
       fonts = mkOpt (listOf package) [];
 
-      xserver = = {
+      xserver = {
         enable = mkBoolOpt false;
         sessionCommands = mkOpt lines "";
         defaultSession = mkOpt str "";
