@@ -82,7 +82,7 @@ in {
         executable = true;
       };
       modules.theme.onReload.xtheme = xrdb;
-      modules.core.xserver.sessionCommands = ''
+      core.xserver.sessionCommands = ''
         cat ~/.config/xtheme/* | '${pkgs.xorg.xrdb}/bin/xrdb' -load
       '';
     })

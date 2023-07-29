@@ -33,7 +33,7 @@ in {
         }
     '';
   in {
-    modules.core.xserver.sessionCommands = cmd;
+    core.xserver.sessionCommands = cmd;
     home.dataFile = mkIf (cfg.wallpaper != "") {
       "wallpaper".source = "${wallpapers}/${cfg.wallpaper}";
     };
