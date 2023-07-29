@@ -11,7 +11,6 @@ in {
   config = mkIf cfg.enable {
     services = {
       xserver = {
-        enable = true;
         displayManager = {
           defaultSession = "none+myxmonad";
         };

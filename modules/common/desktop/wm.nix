@@ -12,6 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     core = {
+      xserver.enable = true;
       packages = with pkgs; [
         xmonad-log
         haskellPackages.mzanic-xmonad
