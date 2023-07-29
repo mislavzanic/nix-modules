@@ -48,7 +48,7 @@
     pkgs = mkPkgs {inherit system overlays; pkgs = nixpkgs;};
     lib = nixpkgs.lib.extend (mkLib {inherit pkgs inputs;});
 
-    mkModuleArr = path: mapModulesRec' path import
+    mkModuleArr = path: mapModulesRec' path import;
   in {
     inherit overlays;
     modules = (mapModulesRec ./modules import);
