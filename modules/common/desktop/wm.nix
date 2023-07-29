@@ -14,15 +14,13 @@ in {
     core = {
       xserver = {
         enable = true;
-        displayManager = {
-          defaultSession = "none+myxmonad";
-          session = {
-            name = "myxmonad";
-            start = ''
-              /usr/bin/env mzanic-xmonad &
-              waitPID=$!
-            '';
-          };
+        defaultSession = "none+myxmonad";
+        session = {
+          name = "myxmonad";
+          start = ''
+            /usr/bin/env mzanic-xmonad &
+            waitPID=$!
+          '';
         };
       };
       packages = with pkgs; [
