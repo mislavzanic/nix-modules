@@ -8,30 +8,31 @@
 with lib;
 with lib.my; let
   cfg = config.modules.nixos.theme;
+  cfg' = config.modules.theme;
 in {
   options.modules.nixos.theme = with types; {
     sessionCommands = mkOpt lines "";
   };
 
-  config = mkIf (config.modules.theme.active != null) (mkMerge [
+  config = mkIf (cfg'.active != null) (mkMerge [
     {
       fonts.fontconfig.defaultFonts = {
-        sansSerif = [config.modules.theme.fonts.sans.name];
-        monospace = [config.modules.theme.fonts.mono.name];
+        sansSerif = [cfg'.fonts.sans.name];
+        monospace = [cfg'.fonts.mono.name];
         emoji = ["Noto Color Emoji"];
       };
     }
-    (mkIf (config.modules.theme.onReload != {})
+    (mkIf (cfg'.onReload != {})
       (let
         reloadTheme = with pkgs; (writeScriptBin "reloadTheme" ''
           #!${stdenv.shell}
-          echo "Reloading current theme: ${cfg.active}"
+          echo "Reloading current theme: ${cfg'.active}"
           ${concatStringsSep "\n"
             (mapAttrsToList (name: script: ''
                 echo "[${name}]"
                 ${script}
               '')
-              cfg.onReload)}
+              cfg'.onReload)}
         '');
       in {
         user.packages = [reloadTheme];
