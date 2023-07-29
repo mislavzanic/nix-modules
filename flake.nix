@@ -47,12 +47,12 @@
     overlays = xmonad-config.overlays;
     pkgs = mkPkgs {inherit system overlays; pkgs = nixpkgs;};
     lib = nixpkgs.lib.extend (mkLib {inherit pkgs inputs;});
+
+    mkModuleArr = path: mapModulesRec' path import
   in {
     inherit overlays;
     modules = (mapModulesRec ./modules import);
-    nixosModules =
-      (mapModulesRec' (toString ./modules/common) import) ++ (mapModulesRec' (toString ./modules/systems/nixos));
-    hmModules =
-      (mapModulesRec' (toString ./modules/common) import) ++ (mapModulesRec' (toString ./modules/systems/home));
+    nixosModules = (mkModuleArr (toString ./modules/common)) ++ (mkModuleArr (toString ./modules/systems/nixos));
+    hmModules = (mkModuleArr (toString ./modules/common)) ++ (mkModuleArr (toString ./modules/systems/home));
   };
 }
