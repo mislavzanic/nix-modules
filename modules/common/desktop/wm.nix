@@ -12,18 +12,6 @@ in {
 
   config = mkIf cfg.enable {
     core = {
-      xserver = {
-        enable = true;
-        defaultSession = "none+myxmonad";
-        session = {
-          name = "myxmonad";
-          start = ''
-            /usr/bin/env mzanic-xmonad &
-            waitPID=$!
-          '';
-        };
-      };
-
       packages = with pkgs; [
         xmonad-log
         haskellPackages.mzanic-xmonad
@@ -42,6 +30,8 @@ in {
         noto-fonts-emoji
       ];
     };
+
+    modules.${cfgType}.desktop.wm.enable = true;
 
     home.configFile = {
       "xmobar/xpm".source = "${configDir}/xmobar/xpm";
