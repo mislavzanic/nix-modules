@@ -27,9 +27,16 @@ with lib.my; {
         sessionCommands = mkAliasDefinitions options.core.xserver.sessionCommands;
         session = [
           {
-            name = config.core.xserver.session.name;
-            start = config.core.xserver.session.start;
+            name = "myxmonad";
+            start = ''
+              /usr/bin/env mzanic-xmonad &
+              waitPID=$!
+            '';
           }
+          # {
+          #   name = config.core.xserver.session.name;
+          #   start = config.core.xserver.session.start;
+          # }
         ];
       };
     };

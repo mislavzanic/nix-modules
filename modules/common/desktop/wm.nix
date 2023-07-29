@@ -23,6 +23,7 @@ in {
           '';
         };
       };
+
       packages = with pkgs; [
         xmonad-log
         haskellPackages.mzanic-xmonad
