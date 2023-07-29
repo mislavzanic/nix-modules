@@ -21,7 +21,7 @@ in {
         emoji = ["Noto Color Emoji"];
       };
     }
-    (mkIf (cfg.onReload != {})
+    (mkIf (config.modules.theme.onReload != {})
       (let
         reloadTheme = with pkgs; (writeScriptBin "reloadTheme" ''
           #!${stdenv.shell}
