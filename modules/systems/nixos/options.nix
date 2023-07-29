@@ -25,19 +25,7 @@ with lib.my; {
       displayManager = {
         defaultSession = mkAliasDefinitions options.core.xserver.defaultSession;
         sessionCommands = mkAliasDefinitions options.core.xserver.sessionCommands;
-        session = [
-          {
-            name = "myxmonad";
-            start = ''
-              /usr/bin/env mzanic-xmonad &
-              waitPID=$!
-            '';
-          }
-    #       # {
-    #       #   name = config.core.xserver.session.name;
-    #       #   start = config.core.xserver.session.start;
-    #       # }
-        ];
+        windowManager.session = [config.core.xserver.session];
       };
     };
 
