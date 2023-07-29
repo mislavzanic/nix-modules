@@ -16,8 +16,8 @@ in {
   config = mkIf (config.modules.theme.active != null) (mkMerge [
     {
       fonts.fontconfig.defaultFonts = {
-        sansSerif = [cfg.fonts.sans.name];
-        monospace = [cfg.fonts.mono.name];
+        sansSerif = [config.modules.theme.fonts.sans.name];
+        monospace = [config.modules.theme.fonts.mono.name];
         emoji = ["Noto Color Emoji"];
       };
     }
