@@ -21,23 +21,23 @@ with lib.my; {
     environment.systemPackages = mkAliasDefinitions options.core.packages;
 
     services.xserver = {
-    #   enable = mkAliasDefinitions options.core.xserver.enable;
+      enable = mkAliasDefinitions options.core.xserver.enable;
       displayManager = {
-    #     defaultSession = mkAliasDefinitions options.core.xserver.defaultSession;
+        defaultSession = mkAliasDefinitions options.core.xserver.defaultSession;
         sessionCommands = mkAliasDefinitions options.core.xserver.sessionCommands;
-    #     session = [
-    #       {
-    #         name = "myxmonad";
-    #         start = ''
-    #           /usr/bin/env mzanic-xmonad &
-    #           waitPID=$!
-    #         '';
-    #       }
+        session = [
+          {
+            name = "myxmonad";
+            start = ''
+              /usr/bin/env mzanic-xmonad &
+              waitPID=$!
+            '';
+          }
     #       # {
     #       #   name = config.core.xserver.session.name;
     #       #   start = config.core.xserver.session.start;
     #       # }
-    #     ];
+        ];
       };
     };
 

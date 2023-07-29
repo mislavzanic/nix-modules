@@ -12,6 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     core = {
+      xserver = {
+        enable = true;
+        defaultSession = "none+myxmonad";
+      };
       packages = with pkgs; [
         xmonad-log
         haskellPackages.mzanic-xmonad
@@ -31,7 +35,7 @@ in {
       ];
     };
 
-    modules.${cfgType}.desktop.wm.enable = true;
+    # modules.${cfgType}.desktop.wm.enable = true;
 
     home.configFile = {
       "xmobar/xpm".source = "${configDir}/xmobar/xpm";
