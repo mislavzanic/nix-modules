@@ -13,13 +13,13 @@ with lib.my; let
 in {
   options.modules.theme.wallpapers = with types; {
     wallpaper = mkOpt str "";
-    loginWallpaper = 
-      mkOpt (either str null) 
-      (
-        if cfg.wallpaper != ""
-        then toFilteredImage ("${wallpapers}/${cfg.wallpaper}") "-gaussian-blur 0x2 -modulate 70 -level 5%"
-        else null
-      );
+    # loginWallpaper = 
+    #   mkOpt (either str null) 
+    #   (
+    #     if cfg.wallpaper != ""
+    #     then toFilteredImage ("${wallpapers}/${cfg.wallpaper}") "-gaussian-blur 0x2 -modulate 70 -level 5%"
+    #     else null
+    #   );
   };
 
   config = 

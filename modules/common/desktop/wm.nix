@@ -3,6 +3,7 @@ with lib;
 with lib.my;
 let
   cfg = config.modules.desktop.wm; cfgType = config.type;
+  cfgType = config.type;
   configDir = ../../../config;
 in {
   options.modules.desktop.wm = with types; {
@@ -38,6 +39,7 @@ in {
         source = "${configDir}/xmobar/trayer-padding-icon.sh";
         executable = true;
       };
+      "x11".source = "${configDir}/x11";
     };
   };
 }
