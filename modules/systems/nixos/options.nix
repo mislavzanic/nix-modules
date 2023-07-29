@@ -25,8 +25,8 @@ with lib.my; {
       displayManager = {
         defaultSession = mkAliasDefinitions options.core.xserver.defaultSession;
         sessionCommands = mkAliasDefinitions options.core.xserver.sessionCommands;
-        windowManager.session = [config.core.xserver.session];
       };
+      windowManager.session = [config.core.xserver.session];
     };
 
     home-manager = {
