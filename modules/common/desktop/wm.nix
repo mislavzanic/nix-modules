@@ -60,7 +60,7 @@ in {
         enable = true;
         backend = "glx";
         vSync = true;
-        inactiveOpacity = 0.9;
+        inactiveOpacity = 0.85;
         settings = {
           blur = {
             method = "gaussian";
