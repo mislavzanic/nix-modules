@@ -17,7 +17,7 @@ window:
   decorations: none
   startup_mode: Windowed
 
-  opacity: 0.80
+  opacity: 1.0
 
 scrolling:
   history: 9999
