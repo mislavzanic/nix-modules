@@ -11,6 +11,7 @@ with lib.my; let
   cfgType = config.type;
 in {
   options.modules.theme = with types; {
+    hidpi = mkBoolOpt false;
     active = mkOption {
       type = nullOr str;
       default = null;
@@ -188,6 +189,11 @@ in {
             </fontconfig>
           '';
         }
+        (mkIf cfg.hidpi {
+          "xtheme/hidpi".text = ''
+            Xft.dpi: 192
+          '';
+        })
       ]);
     }
   ]);
