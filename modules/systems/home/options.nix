@@ -18,14 +18,15 @@ in {
     programs.home-manager.enable = true;
     targets.genericLinux.enable = config.genericLinux;
 
-    xsession.windowManager.command = mkAliasDefinition options.core.xserver.wmCommand;
+    xsession = {
+      enable = mkAliasDefinition options.core.xserver;
+      windowManager.command = mkAliasDefinition options.core.xserver.wmCommand;
+      initExtra = concatStringsSep "\n"
+        [config.core.extraInit config.core.xserver.sessionCommands];
 
-    xsession.initExtra = concatStringsSep "\n"
-      [config.core.extraInit config.core.xserver.sessionCommands];
-
-    xsession.profileExtra = 
-      concatStringsSep "\n"
-      (mapAttrsToList (n: v: "export ${n}=\"${v}\"") coreCfg.sessionVariables);
+      profileExtra = concatStringsSep "\n"
+        (mapAttrsToList (n: v: "export ${n}=\"${v}\"") coreCfg.sessionVariables);
+    };
 
     home = {
       homeDirectory = config.user.home;
