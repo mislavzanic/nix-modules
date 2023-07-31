@@ -26,6 +26,7 @@ in {
               waitPID=$!
             '';
           };
+          wmCommand = with pkgs; "${haskellPackages.mzanic-xmonad}/bin/mzanic-xmonad";
         };
         packages = with pkgs; [
           xmonad-log

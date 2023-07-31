@@ -18,7 +18,7 @@ in {
     programs.home-manager.enable = true;
     targets.genericLinux.enable = config.genericLinux;
 
-    xsession.windowManager.command = config.core.xserver.session.start;
+    xsession.windowManager.command = mkAliasDefinition options.core.xserver.wmCommand;
 
     xsession.initExtra = concatStringsSep "\n"
       [config.core.extraInit config.core.xserver.sessionCommands];

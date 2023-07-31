@@ -50,6 +50,7 @@ with lib.my; {
           name = mkOpt str "";
           start = mkOpt lines "";
         };
+        wmCommand = mkOpt str "";
       };
     };
   };
