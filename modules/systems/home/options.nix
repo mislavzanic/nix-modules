@@ -23,7 +23,9 @@ in {
     xsession.initExtra = concatStringsSep "\n"
       [config.core.extraInit config.core.xserver.sessionCommands];
 
-    xsession.profileExtra = mkAliasDefinition options.core.sessionVariables;
+    xsession.profileExtra = 
+      concatStringsSep "\n"
+      (mapAttrsToList (n: v: "export ${n}=\"${v}\"") coreCfg.sessionVariables);
 
     home = {
       homeDirectory = config.user.home;
