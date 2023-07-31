@@ -19,7 +19,7 @@ in {
     targets.genericLinux.enable = config.genericLinux;
 
     xsession = {
-      enable = mkAliasDefinition options.core.xserver;
+      enable = mkAliasDefinition options.core.xserver.enable;
       windowManager.command = mkAliasDefinition options.core.xserver.wmCommand;
       initExtra = concatStringsSep "\n"
         [config.core.extraInit config.core.xserver.sessionCommands];
