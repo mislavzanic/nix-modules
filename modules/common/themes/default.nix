@@ -92,11 +92,11 @@ in {
         executable = true;
       };
     })
-    (mkIf config.modules.services.dunst.enable {
-      home.configFile = {
-        "dunst/dunstrc".text = import ./dunst.nix;
-      };
-    })
+    # (mkIf config.modules.services.dunst.enable {
+    #   home.configFile = {
+    #     "dunst/dunstrc".text = import ./dunst.nix;
+    #   };
+    # })
     {
       home.configFile = with config.modules; (mkMerge [
         (mkIf apps.alacritty.enable {
