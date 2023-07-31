@@ -56,7 +56,7 @@ in {
         "x11".source = "${configDir}/x11";
       };
     }
-    {
+    (mkIf cfg.picom.enable {
       services.picom = {
         enable = true;
         backend = "glx";
@@ -70,6 +70,6 @@ in {
           };
         };
       };
-    }
+    })
   ]);
 }
