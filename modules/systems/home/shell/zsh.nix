@@ -16,7 +16,7 @@ in {
   config = mkIf cfg.enable {
     programs = {
       zsh = {
-        dotDir = "~/.conig/zsh";
+        dotDir = "/home/mzanic/.conig/zsh";
         enableAutosuggestions = true;
         history = {
           size = 10000000;
