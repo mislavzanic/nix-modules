@@ -26,5 +26,8 @@ in {
         };
       };
     };
+    modules.shell.zsh.rcInit = mkIf (config.type == "home") ''
+      eval "$(starship init zsh)"
+    '';
   };
 }
