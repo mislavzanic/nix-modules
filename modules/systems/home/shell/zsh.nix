@@ -16,7 +16,7 @@ in {
   config = mkIf cfg.enable {
     programs = {
       zsh = {
-        dotDir = "$XDG_CONFIG_HOME/zsh";
+        dotDir = "~/.conig/zsh";
         enableAutosuggestions = true;
         history = {
           size = 10000000;
