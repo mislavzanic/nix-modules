@@ -64,11 +64,6 @@ in {
     };
 
     home.configFile = {
-      "zsh" = {
-        source = "${configDir}/zsh";
-        recursive = true;
-      };
-
       "zsh/extra.zshrc".text = let
         aliasLines = mapAttrsToList (n: v: "alias ${n}=\"${v}\"") cfg.aliases;
       in ''
