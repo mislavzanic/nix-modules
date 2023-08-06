@@ -40,7 +40,7 @@
     home-manager,
     ...
   }: let
-    inherit (lib.my) mapModulesRec mapModulesRec';
+    inherit (lib.my) mapModulesRec mapModulesRec' mapShell;
     inherit (nix-utils) mkPkgs mkLib;
     system = "x86_64-linux";
 
