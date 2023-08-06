@@ -54,5 +54,6 @@
     modules = (mapModulesRec ./modules import);
     nixosModules = (mkModuleArr (toString ./modules/common)) ++ (mkModuleArr (toString ./modules/systems/nixos));
     hmModules = (mkModuleArr (toString ./modules/common)) ++ (mkModuleArr (toString ./modules/systems/home));
+    devShells."${system}" = mapShell ./shells {inherit pkgs lib;};
   };
 }

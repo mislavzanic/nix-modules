@@ -37,6 +37,8 @@ in {
           xss-lock
           networkmanagerapplet
           pasystray
+          pamixer
+          brightnessctl
         ];
 
         fonts = with pkgs; [
