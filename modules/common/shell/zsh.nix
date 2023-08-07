@@ -8,7 +8,7 @@
 with lib;
 with lib.my; let
   cfg = config.modules.shell.zsh;
-  configDir = toString ../../../config;
+  configDir = builtins.toString ../../../config;
   cfgType = config.type;
 in {
   options.modules.shell.zsh = with types; {
@@ -34,7 +34,6 @@ in {
       zsh = {
         enable = true;
         enableCompletion = true;
-        syntaxHighlighting.enable = true;
 
         shellAliases = {
           ls = "${pkgs.exa}/bin/exa -al --color=always --group-directories-first";
@@ -50,7 +49,6 @@ in {
     modules.${cfgType}.shell.zsh.enable = true;
 
     core.userPackages = with pkgs; [
-      zsh
       nix-zsh-completions
       exa
       fasd

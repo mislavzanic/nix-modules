@@ -20,6 +20,6 @@ in {
       nix-direnv.enable = true;
     };
 
-    modules.shell.zsh.rcInit = ''eval "$(direnv hook zsh)"'';
+    modules.shell.zsh.rcInit = ''eval "$(${pkgs.direnv}/bin/direnv hook zsh)"'';
   };
 }
