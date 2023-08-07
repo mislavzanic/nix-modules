@@ -8,7 +8,7 @@
 with lib;
 with lib.my; let
   cfg = config.modules.home.shell.zsh;
-  configDir = builtins.toString ../../../../config
+  configDir = builtins.toString ../../../../config;
 in {
   options.modules.home.shell.zsh = with types; {
     enable = mkBoolOpt false;
