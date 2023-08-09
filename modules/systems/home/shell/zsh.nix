@@ -28,7 +28,7 @@ in {
         enableSyntaxHighlighting = true;
         history = {
           size = 10000000;
-          path = "$XDG_CACHE_HOME/zsh/history";
+          path = "$HOME/.cache/zsh/history";
         };
         initExtra = fileToLines "${configDir}/zsh/.zshrc";
         envExtra = fileToLines "${configDir}/zsh/.zshenv";
