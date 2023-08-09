@@ -12,30 +12,38 @@ in {
   options = with types; {
     genericLinux = mkBoolOpt false;
   };
-  config = {
-    type = "home";
+  config = (mkMerge [
+    {
+      type = "home";
 
-    programs.home-manager.enable = true;
-    targets.genericLinux.enable = config.genericLinux;
+      programs.home-manager.enable = true;
+      targets.genericLinux.enable = config.genericLinux;
 
-    xsession = {
-      enable = mkAliasDefinitions options.core.xserver.enable;
-      windowManager.command = mkAliasDefinitions options.core.xserver.wmCommand;
-      initExtra = concatStringsSep "\n"
-        [config.core.extraInit config.core.xserver.sessionCommands];
+      xsession = {
+        enable = mkAliasDefinitions options.core.xserver.enable;
+        windowManager.command = mkAliasDefinitions options.core.xserver.wmCommand;
+        initExtra = concatStringsSep "\n"
+          [config.core.extraInit config.core.xserver.sessionCommands];
 
-      profileExtra = concatStringsSep "\n"
-        (mapAttrsToList (n: v: "export ${n}=\"${v}\"") coreCfg.sessionVariables);
-    };
+        profileExtra = concatStringsSep "\n"
+          (mapAttrsToList (n: v: "export ${n}=\"${v}\"") coreCfg.sessionVariables);
+      };
 
-    home = {
-      homeDirectory = config.user.home;
-      username = config.user.name;
-      packages = coreCfg.packages ++ coreCfg.fonts ++ coreCfg.userPackages;
-    };
-    xdg = {
-      configFile = mkAliasDefinitions options.home.configFile;
-      dataFile = mkAliasDefinitions options.home.dataFile;
-    };
-  };
+      home = {
+        homeDirectory = config.user.home;
+        username = config.user.name;
+        packages = coreCfg.packages ++ coreCfg.fonts ++ coreCfg.userPackages;
+      };
+      xdg = {
+        configFile = mkAliasDefinitions options.home.configFile;
+        dataFile = mkAliasDefinitions options.home.dataFile;
+      };
+    }
+    (mkIf (config.core.xserver.enable != true) {
+      home.file.".profile".text = ''
+        ${config.core.sessionVariables}
+        ${config.core.extraInit}
+      '';
+    })
+  ]);
 }
