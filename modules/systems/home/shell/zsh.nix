@@ -26,6 +26,9 @@ in {
         dotDir = ".config/zsh";
         enableAutosuggestions = true;
         enableSyntaxHighlighting = true;
+        initExtraFirst = ''
+          [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
+        '';
         history = {
           size = 10000000;
           path = "$HOME/.cache/zsh/history";
