@@ -12,7 +12,10 @@ in {
   options = with types; {
     genericLinux = mkBoolOpt false;
   };
-  config = (mkMerge [
+  config = let
+    sessionVars = concatStringsSep "\n" 
+      (mapAttrsToList (n: v: "export ${n}=\"${v}\"") coreCfg.sessionVariables);
+  in (mkMerge [
     {
       type = "home";
 
@@ -25,8 +28,7 @@ in {
         initExtra = concatStringsSep "\n"
           [config.core.extraInit config.core.xserver.sessionCommands];
 
-        profileExtra = concatStringsSep "\n"
-          (mapAttrsToList (n: v: "export ${n}=\"${v}\"") coreCfg.sessionVariables);
+        profileExtra = sessionVars;
       };
 
       home = {
@@ -41,7 +43,7 @@ in {
     }
     (mkIf (config.core.xserver.enable != true) {
       home.file.".profile".text = ''
-        ${config.core.sessionVariables}
+        ${sessionVars}
         ${config.core.extraInit}
       '';
     })
