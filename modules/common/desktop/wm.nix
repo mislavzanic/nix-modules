@@ -37,8 +37,11 @@ in {
           xss-lock
           networkmanagerapplet
           pasystray
+          pavucontrol
           pamixer
           brightnessctl
+          maim
+          lxappearance
         ];
 
         fonts = with pkgs; [
@@ -68,13 +71,6 @@ in {
         backend = "glx";
         vSync = true;
         inactiveOpacity = 0.85;
-        settings = {
-          blur = {
-            method = "gaussian";
-            size = 10;
-            deviation = 5.0;
-          };
-        };
       };
     })
   ]);
