@@ -56,7 +56,7 @@ in {
           executable = true;
         };
         "x11".source = "${configDir}/x11";
-        "xmonad/screenshot" - {
+        "xmonad/screenshot" = {
           source = "${configDir}/xmonad/takeScreenshot.sh"
           executable = true;
         };
