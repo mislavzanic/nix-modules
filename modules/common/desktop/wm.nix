@@ -56,6 +56,10 @@ in {
           executable = true;
         };
         "x11".source = "${configDir}/x11";
+        "xmonad/screenshot" - {
+          source = "${configDir}/xmonad/takeScreenshot.sh"
+          executable = true;
+        };
       };
     }
     (mkIf cfg.picom.enable {
