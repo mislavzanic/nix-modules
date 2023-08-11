@@ -57,7 +57,7 @@ in {
         };
         "x11".source = "${configDir}/x11";
         "xmonad/screenshot" = {
-          source = "${configDir}/xmonad/takeScreenshot.sh"
+          source = "${configDir}/xmonad/takeScreenshot.sh";
           executable = true;
         };
       };
