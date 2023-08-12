@@ -49,11 +49,17 @@
     lib = nixpkgs.lib.extend (mkLib {inherit pkgs inputs;});
 
     mkModuleArr = path: mapModulesRec' path import;
-  in {
-    inherit overlays;
-    modules = (mapModulesRec ./modules import);
-    nixosModules = (mkModuleArr (toString ./modules/common)) ++ (mkModuleArr (toString ./modules/systems/nixos));
+    allModules = (mapModulesRec ./modules import);
     hmModules = (mkModuleArr (toString ./modules/common)) ++ (mkModuleArr (toString ./modules/systems/home));
+    nixosModules = (mkModuleArr (toString ./modules/common)) ++ (mkModuleArr (toString ./modules/systems/nixos));
+
+  in {
+    inherit overlays hmModules nixosModules allModules;
+
+    mkHomeCfg = attrs @ {mods, ...}: home-manager.lib.homeManagerConfiguration {
+      modules = hmModules ++ mods;
+    } // attrs;
+
     devShells."${system}" = mapShell ./shells {inherit pkgs lib;};
   };
 }
