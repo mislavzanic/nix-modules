@@ -56,7 +56,7 @@
   in {
     inherit overlays hmModules nixosModules allModules;
 
-    mkHomeCfg = attrs @ {mods, ...}: home-manager.lib.homeManagerConfiguration ({
+    mkHomeCfg = mods: attrs: home-manager.lib.homeManagerConfiguration ({
       modules = hmModules ++ mods;
     } // attrs);
 
