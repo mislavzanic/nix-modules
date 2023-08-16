@@ -56,9 +56,9 @@
   in {
     inherit overlays hmModules nixosModules allModules;
 
-    mkHomeCfg = attrs @ {mods, ...}: home-manager.lib.homeManagerConfiguration {
+    mkHomeCfg = attrs @ {mods, ...}: home-manager.lib.homeManagerConfiguration ({
       modules = hmModules ++ mods;
-    } // attrs;
+    } // attrs);
 
     devShells."${system}" = mapShell ./shells {inherit pkgs lib;};
   };
