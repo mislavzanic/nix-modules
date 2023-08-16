@@ -8,13 +8,15 @@
 with lib;
 with lib.my; let
   cfg = config.modules.nixos.shell.zsh;
+  cfg' = config.modules.shell.zsh;
   configDir = toString ../../../../config;
 in {
   options.modules.nixos.shell.zsh = with types; {
-    enable = mkBoolOpt false;
+    zshrc = mkOpt lines "";
+    zshenv = mkOpt lines "";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg'.enable {
     users.defaultUserShell = pkgs.zsh;
 
     programs = {
@@ -28,9 +30,11 @@ in {
     };
 
     home.configFile = {
-      "zsh" = {
-        source = "${configDir}/zsh";
-        recursive = true;
+      "zsh/.zshrc" = {
+        text = ''${cfg.zshrc}'';
+      };
+      "zsh/.zshenv" = {
+        text = ''${cfg.zshenv}'';
       };
     };
   };

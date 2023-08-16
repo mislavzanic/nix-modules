@@ -46,7 +46,12 @@ in {
       };
     };
 
-    modules.${cfgType}.shell.zsh.enable = true;
+    modules.${cfgType}.shell.zsh = let
+      zshDir = "${configDir}/zsh";
+    in {
+      zshrc = ''${builtins.readFile "${zshDir}/.zshrc"}'';
+      zshenv = ''${builtins.readFile "${zshDir}/.zshenv"}'';
+    };
 
     core.userPackages = with pkgs; [
       nix-zsh-completions

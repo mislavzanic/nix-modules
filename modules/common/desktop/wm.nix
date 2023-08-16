@@ -68,9 +68,10 @@ in {
     (mkIf cfg.picom.enable {
       services.picom = {
         enable = true;
-        backend = "glx";
+        backend = "xrender";
         vSync = true;
-        inactiveOpacity = 0.85;
+        inactiveOpacity = 0.8;
+        activeOpacity = 1;
       };
     })
   ]);
