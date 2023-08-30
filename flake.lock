@@ -251,12 +251,20 @@
       }
     },
     "nix-utils": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1690016362,
-        "narHash": "sha256-ECTp2zEf4sB/1z0jky5Wxx0SPcCakSRMAmsHOQ6jHaY=",
+        "lastModified": 1693419957,
+        "narHash": "sha256-vreSKKzOv3ehPltAvpI6DrLO93aVH3MPl4omqsbPEuQ=",
         "owner": "mislavzanic",
         "repo": "nix-utils",
-        "rev": "46562724aaceb20eaae691cdbc732e2bcf9e3cad",
+        "rev": "cb51a0485dead161ad93915386a3d0d73a74933b",
         "type": "github"
       },
       "original": {

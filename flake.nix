@@ -52,7 +52,7 @@
     pkgs = mkPkgs {inherit system overlays; pkgs = nixpkgs;};
     lib = nixpkgs.lib.extend (mkLib {inherit pkgs inputs;});
 
-    utilModules = inputs.nix-utils.modules;
+    utilModules = nix-utils.modules;
     mkModuleArr = path: mapModulesRec' path import;
     allModules = (mapModulesRec ./modules import);
     hmModules = [utilModules.common utilModules.home]
