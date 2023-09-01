@@ -55,10 +55,10 @@
     utilModules = nix-utils.modules;
     mkModuleArr = path: mapModulesRec' path import;
     allModules = (mapModulesRec ./modules import);
-    hmModules = [utilModules.common utilModules.home]
+    hmModules = [utilModules.common utilModules.home xmonad-config.module]
                 ++ (mkModuleArr (toString ./modules/common))
                 ++ (mkModuleArr (toString ./modules/systems/home));
-    nixosModules = [utilModules.common utilModules.nixos]
+    nixosModules = [utilModules.common utilModules.nixos xmonad-config.module]
                    ++ (mkModuleArr (toString ./modules/common))
                    ++ (mkModuleArr (toString ./modules/systems/nixos));
 
