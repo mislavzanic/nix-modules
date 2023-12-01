@@ -9,7 +9,7 @@ with pkgs; let
   pythonPkgs =
     toolchains.py
     ++ [
-      pypy38
+      pypy3
       python310Packages.z3
       python310Packages.numpy
       python310Packages.matplotlib
