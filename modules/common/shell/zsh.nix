@@ -36,10 +36,10 @@ in {
         enableCompletion = true;
 
         shellAliases = {
-          ls = "${pkgs.exa}/bin/exa -al --color=always --group-directories-first";
-          la = "${pkgs.exa}/bin/exa -a --color=always --group-directories-first";
-          ll = "${pkgs.exa}/bin/exa -l --color=always --group-directories-first"; 
-          lt = "${pkgs.exa}/bin/exa -aT --color=always --group-directories-first"; 
+          ls = "${pkgs.eza}/bin/eza -al --color=always --group-directories-first";
+          la = "${pkgs.eza}/bin/eza -a --color=always --group-directories-first";
+          ll = "${pkgs.eza}/bin/eza -l --color=always --group-directories-first"; 
+          lt = "${pkgs.eza}/bin/eza -aT --color=always --group-directories-first"; 
           g = "git";
           v = "vim";
         };
@@ -55,7 +55,7 @@ in {
 
     core.userPackages = with pkgs; [
       nix-zsh-completions
-      exa
+      eza
       fasd
       fd
       ripgrep
