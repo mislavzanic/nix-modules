@@ -1,0 +1,34 @@
+import = [
+"~/.config/alacritty/color.toml",
+]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+dimensions = { columns = 140, lines = 40 }
+decorations = "None"
+
+[font]
+normal      = { family = monospace }
+bold        = { family = monospace }
+italic      = { family = monospace }
+bold_italic = { family = monospace }
+
+size = 7
+glyph_offset = { x = 0, y = 0}
+
+[mouse]
+bindings = [
+{ mouse = "Middle", action = "Paste"},
+]
+
+[keyboard]
+bindings = [
+{ key = "V",      mods = "Alt",         action = Paste            },
+{ key = "C",      mods = "Alt",         action = Copy             },
+
+{ key = "Equals", mods = "Alt",         action = IncreaseFontSize },
+{ key = "Minus",  mods = "Alt",         action = DecreaseFontSize },
+{ key = "Minus",  mods = "Alt | Shift", action = ResetFontSize    },
+]

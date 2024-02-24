@@ -101,31 +101,31 @@ in {
     {
       home.configFile = with config.modules; (mkMerge [
         (mkIf apps.alacritty.enable {
-          "alacritty/color.yml".text = with cfg.colors; ''
-            colors:
-              primary:
-                background: '${types.bg}'
-                foreground: '${types.fg}'
+          "alacritty/color.toml".text = with cfg.colors; ''
+            [colors]
+            [colors.primary]
+            foreground = "${types.fg}"
+            background = "${types.bg}"
 
-              normal:
-                black:   '${black}'
-                red:     '${red}'
-                green:   '${green}'
-                yellow:  '${yellow}'
-                blue:    '${blue}'
-                magenta: '${magenta}'
-                cyan:    '${cyan}'
-                white:   '${silver}'
+            [colors.normal]
+            black   = "${black}"
+            red     = "${red}"
+            green   = "${green}"
+            yellow  = "${yellow}"
+            blue    = "${blue}"
+            magenta = "${magenta}"
+            cyan    = "${cyan}"
+            white   = "${silver}"
 
-              bright:
-                black:   '${grey}'
-                red:     '${brightred}'
-                green:   '${brightgreen}'
-                yellow:  '${brightyellow}'
-                blue:    '${brightblue}'
-                magenta: '${brightmagenta}'
-                cyan:    '${brightcyan}'
-                white:   '${white}'
+            [colors.bright]
+            black   = "${grey}"
+            red     = "${brightred}"
+            green   = "${brightgreen}"
+            yellow  = "${brightyellow}"
+            blue    = "${brightblue}"
+            magenta = "${brightmagenta}"
+            cyan    = "${brightcyan}"
+            white   = "${white}"
           '';
         })
         {
