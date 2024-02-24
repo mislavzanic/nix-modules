@@ -10,10 +10,10 @@ dimensions = { columns = 140, lines = 40 }
 decorations = "None"
 
 [font]
-normal      = { family = monospace }
-bold        = { family = monospace }
-italic      = { family = monospace }
-bold_italic = { family = monospace }
+normal      = { family = "monospace" }
+bold        = { family = "monospace" }
+italic      = { family = "monospace" }
+bold_italic = { family = "monospace" }
 
 size = 7
 glyph_offset = { x = 0, y = 0}
