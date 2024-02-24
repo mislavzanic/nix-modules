@@ -25,10 +25,10 @@ bindings = [
 
 [keyboard]
 bindings = [
-{ key = "V",      mods = "Alt",         action = Paste            },
-{ key = "C",      mods = "Alt",         action = Copy             },
+{ key = "V",      mods = "Alt",         action = "Paste"            },
+{ key = "C",      mods = "Alt",         action = "Copy"             },
 
-{ key = "Equals", mods = "Alt",         action = IncreaseFontSize },
-{ key = "Minus",  mods = "Alt",         action = DecreaseFontSize },
-{ key = "Minus",  mods = "Alt | Shift", action = ResetFontSize    },
+{ key = "Equals", mods = "Alt",         action = "IncreaseFontSize" },
+{ key = "Minus",  mods = "Alt",         action = "DecreaseFontSize" },
+{ key = "Minus",  mods = "Alt | Shift", action = "ResetFontSize"    },
 ]
