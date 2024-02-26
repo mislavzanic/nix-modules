@@ -23,7 +23,6 @@ in {
       zsh = {
         enableGlobalCompInit = false;
         autosuggestions.enable = true;
-        syntaxHighlighting.enable = true;
         histSize = 10000000;
         histFile = "$XDG_CACHE_HOME/zsh/history";
       };

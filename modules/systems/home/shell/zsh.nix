@@ -27,7 +27,6 @@ in {
       zsh = {
         dotDir = ".config/zsh";
         enableAutosuggestions = true;
-        enableSyntaxHighlighting = true;
         initExtraFirst = ''
           [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
         '';

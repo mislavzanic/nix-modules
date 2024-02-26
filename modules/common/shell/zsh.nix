@@ -34,7 +34,7 @@ in {
       zsh = {
         enable = true;
         enableCompletion = true;
-
+        syntaxHighlighting.enable = true;
         shellAliases = {
           ls = "${pkgs.eza}/bin/eza -al --color=always --group-directories-first";
           la = "${pkgs.eza}/bin/eza -a --color=always --group-directories-first";
