@@ -17,11 +17,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    xmonad-config = {
-      url = "github:mislavzanic/xmonad-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +34,6 @@
     nixpkgs,
     nix-utils,
     wallpapers,
-    xmonad-config,
     emacs-config,
     home-manager,
     ...
@@ -48,22 +42,21 @@
     inherit (nix-utils) mkPkgs mkLib;
     system = "x86_64-linux";
 
-    overlays = xmonad-config.overlays;
-    pkgs = mkPkgs {inherit system overlays; pkgs = nixpkgs;};
+    pkgs = mkPkgs {inherit system; pkgs = nixpkgs;};
     lib = nixpkgs.lib.extend (mkLib {inherit pkgs inputs;});
 
     utilModules = nix-utils.modules;
     mkModuleArr = path: mapModulesRec' path import;
     allModules = (mapModulesRec ./modules import);
-    hmModules = [utilModules.common utilModules.home xmonad-config.module."${system}"]
+    hmModules = [utilModules.common utilModules.home]
                 ++ (mkModuleArr (toString ./modules/common))
                 ++ (mkModuleArr (toString ./modules/systems/home));
-    nixosModules = [utilModules.common utilModules.nixos xmonad-config.module."${system}"]
+    nixosModules = [utilModules.common utilModules.nixos]
                    ++ (mkModuleArr (toString ./modules/common))
                    ++ (mkModuleArr (toString ./modules/systems/nixos));
 
   in {
-    inherit overlays hmModules nixosModules allModules;
+    inherit hmModules nixosModules allModules;
 
     mkHomeCfg = mods: attrs: home-manager.lib.homeManagerConfiguration ({
       modules = hmModules ++ mods;
